@@ -1,0 +1,16 @@
+1. Build the CLI
+2. Welcome the user, prompt to either select a location, or tell the user to exit.
+3. If they select a location, print the list of locations.
+   a. locations
+4. They can select location by name to print details of the location.
+5. If they select exit, goodbye exit program
+
+To start, build 3 classes:
+ 1. CLI - controller, what communicates with my user and outputs based on my user's interaction with my program.
+ 2. SGInfo - responsible for my objects that I will be displaying. Where objects are created and stored for user's display.
+ 3. API - bring in the external data to consume my api here and instantiate my objects.
+ 
+ Metaprogramming and Mass Assignment
+ We define our initialize method to take in some unspecified attributes object. Then, we iterate over each key/value pair in the attributes hash. The name of the key becomes the name of a setter method and the value associated with the key is the name of the value you want to pass to that method. The ruby .send method then calls the method name that is the key’s name, with an argument of the value. In other words:
+
+self.send(key=, value) 

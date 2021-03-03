@@ -5,11 +5,11 @@ require_relative "lib/studio_ghibli/version"
 Gem::Specification.new do |spec|
   spec.name          = "studio_ghibli"
   spec.version       = StudioGhibli::VERSION
-  spec.authors       = ["ernsykamethelus@yahoo.com"]
+  spec.authors       = ["Ernsyka Methelus"]
   spec.email         = ["ernsykamethelus@yahoo.com"]
 
-  spec.summary       = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description   = "TODO: Write a longer description or delete this line."
+  spec.summary       = %q{"A Ruby gem to have a magical adventure"}
+  spec.description   = %q{"A Ruby gem to have yourself find informations regarding the Studio Ghibli world."}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
@@ -29,9 +29,19 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_development_dependency "bundler", "~> 2.0"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "pry"
+  spec.add_dependency "tty-prompt"
+  spec.add_dependency "net-http"
+  spec.add_dependency "colorize", "~> 0.8.1"
+
+  # spec.add_development_dependency "rake", "~> 13.0"
+
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
 end
+# TODO: Put your gem's public repo URL here.
