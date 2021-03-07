@@ -49,8 +49,6 @@ class CLI
            sleep(1.5)
            puts "Make another selection or choose to exit:"
            input = film_input_prompt
-         #   film_input = list_films
-         #   chosen_film = SGInfo.find_films(film_input)
            when 2
             input = film_input_prompt
             system("clear")
