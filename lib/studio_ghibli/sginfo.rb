@@ -1,47 +1,33 @@
-require_relative './cli'
-require_relative './api'
-
+require 'pry'
+# require_relative './cli'
+# require_relative './api'
 
  class SGInfo
+
     @@all = [] #use arr to access obj in other classes
-     attr_accessor :title, :description, :director, :people, :locations
+     attr_accessor :name, :director, :description, :url, :people, :locations
 
-  #   def initialize(title, description, director, people, locations)
-  #       @title = title
-  #       @description = description
-  #       @director = director
-  #       @people = people
-  #       @locations = locations
-  #       @@all << self
-  #       save
-  #   end
-  # end
-    # massprogramming and metaprogramming to send a web request to an API and returns particular data to the program.
-#    def initialize(film_hash)
-#         film_hash.each {|key, value| self.send(("#{key}="), value)}
-#      save
-#   end
-# end
-def initialize(attributes)
-  attributes.each do |key, value| 
-    self.class.attr_accessor(key)
-    self.send(("#{key}="), value)
-  end
-end
-end 
+    def initialize(name, description = " ", director = " ", url = " ", people = " ", locations = " ")
+        @name = name
+        @description = description
+        @director = director
+        @url = url
+        @people = people
+        @locations = locations
+        @@all << self
+        # binding.pry
+    end
 
-def save
-  @@all<< self
-end
+    def self.all
+        @@all
+    end
 
-def self.all
-    @@all
-  end
-
-  def self.find_films(film_name)
-    self.all.find do |film|
-      film.name == film_name
+    def self.find_films(film_name)
+      self.all.find {|film| film.name == film_name} 
+      # film.name == film_name
       # binding.pry
+    end
   end
-end
+
+
 

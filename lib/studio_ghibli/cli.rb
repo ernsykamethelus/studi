@@ -1,92 +1,90 @@
 #begin building your welcome method and the first method thats going to display content
-#  require 'pry'
- require_relative './sginfo'
- require_relative './api'
-require 'colorize'
+require 'pry'
+require_relative './sginfo'
+require_relative './api'
 
- class CLI
-    # @@grn="\e[1;31m"
-    # @@white="\e[0m"
+class CLI
 
-    def start
-        puts "Hello! Welcome to Studio Ghibli, the world of magick!".cyan.on_blue.bold
-        sleep(1.5)
-        puts "The Studio Ghibli catalogs the people, places, and things found in the worlds of Ghibli. ".cyan.on_blue.bold
-        sleep(1.5)
-        API.get_films
-        welcome(user_input)
-    end
+   def start
+       puts "Hello! Welcome to Studio Ghibli, the world of magick!".cyan.red.bold
+       sleep(0.5)
+       puts "The Studio Ghibli catalogs the people, places, and things found in the worlds of Ghibli. ".cyan.red.bold
+       puts "***********************".red
+       sleep(1.0)
+       puts "Please enter you name:".cyan.red.bold
+       welcome(user_input)
+       input = film_input_prompt
+   end
+       
+   def user_input
+       gets.strip || get.strip.to_i
+   end
+       
+   def welcome(name)
+       puts "Hi! #{name}, Let's go on an adventure, shall we?".cyan.bold.blue
+       sleep(0.5)
+           case film_input_prompt
+           when 1
+           film_input = list_films
+           chosen_film = SGInfo.find_films(film_input)
+           sleep(1.5)
+           puts "Name:"
+           puts "#{chosen_film.name}"
+           sleep(1.5)
+           puts "Director:"
+           puts "#{chosen_film.director}"
+           sleep(1.5)
+           puts "Description:"
+           puts "#{chosen_film.description}"
+           sleep(1.5)
+           puts "Locations:"
+           puts "#{chosen_film.locations}"
+           sleep(1.5)
+           puts "People:"
+           puts "#{chosen_film.people}"
+           sleep(1.5)
+           puts "Website:"
+           puts "#{chosen_film.url}"
+           puts " "
+           sleep(1.5)
+           puts "Make another selection or choose to exit:"
+           input = film_input_prompt
+           when 2
+           goodbye
+           # sleep(2.5)
+       end
+           ending
+   end
 
-    def user_input
-        gets.strip 
-    end
+   def prompt
+       prompt = TTY::Prompt.new
+   end
 
-    def welcome(name)
-        puts "#{name}, which movie would you like to see today?".cyan.on_blue.bold
-        puts "Input 'yes' to see list, 'exit' to leave.".cyan.on_blue.bold
-        menu 
-    end
-
-    #printout list 
-    def film_list
-        SGInfo.all.each.with_index(1) do |film, i|
-            puts ""
-            puts ""
-            puts "#{i}. #{film.name}"
-        end
-        film.selection
-    end
-
- def goodbye
-    puts "More Adventure awaits when you decide to come back!".cyan.on_blue.bold
- end
-
- def not_working
-    puts "I am sorry, will you please try again.".cyan.on_blue.bold
-    menu
- end
-
- def film_data
-    puts "Select desired film for more information".cyan.on_blue.bold
-    selection = user_input
-    film = SGInfo.find.starship(selection)
-    puts ""
-    puts ""
-    puts "***********************************************"
-    puts "Title: #{film.name}"
-    puts "Description: #{film.description}"
-    puts "Director: #{film.director}"
-    puts "People: #{film.people}"
-    puts "Locations: #{film.locations}"
-    puts "***********************************************"
-    menu
- end
-
- def prompt
-    prompt = TTY::Prompt.new
- end
-
- def menu
-    selection = user_input
-    if selection == 'yes'
-        film_list
-        menu
-    elsif selection == "exit"
-        goodbye
-    else
-        not_working
-    end
- end
+   def film_input_prompt
+       prompt.select("Search by Title", cycle: true ) do |menu|
+               menu.choice"List all the films", 1
+               menu.choice "Exit.", 2
+   end
 end
 
+   def list_films
+      films = SGInfo.all
+      film_name = films.collect do |film| 
+       film.name
+       end
+      prompt.select("Please select from the these titles:", film_name)
+   end
 
+   def goodbye
+      puts "More Adventure awaits when you decide to come back!".cyan.blue.bold
+   end
 
-# def goodbye
-#     puts "\nHave a good day!"
-# end
-# end
+   def not_working
+      puts "I am sorry, will you please try again.".cyan.blue.bold
+   end
 
-# ruby lib/studio_ghibli/cli.rb
-# puts 
+   def ending
+      puts "\nHave a good day!"
+   end
+end
 
-# \u{2601}\u{2601}\u{2601}\u{2601}\u{2601}\u{2601}\u{2601}\u{2601}\u{2601}\u{2601}\u{2601}\u{2601}
