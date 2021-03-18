@@ -4,6 +4,7 @@ require_relative './sginfo'
 require_relative './api'
 
 class CLI
+   @@url = []
 
    def start
        puts "Hello! Welcome to Studio Ghibli, the world of magick!".cyan.red.bold
@@ -12,50 +13,52 @@ class CLI
        puts "***********************".red
        sleep(1.0)
        puts "Please enter you name:".cyan.red.bold
-       welcome(user_input)
-      #  input = film_input_prompt
+       welcome
    end
        
-   def user_input
-       gets.strip || get.strip.to_i
+   def user_input(name)
+      gets.strip || gets.strip.to_i
    end
        
-   def welcome(name)
+   def welcome #-> instance variable. class Variable 
+      name = gets.strip || gets.strip.to_i
        puts "Hi! #{name}, Let's go on an adventure, shall we?".cyan.bold.blue
-       sleep(0.5)
-           case film_input_prompt
+       film_input_prompt
+   end
+
+      def case_input(input)
+           case input
            when 1
-           film_input = list_films
-           chosen_film = SGInfo.find_films(film_input)
-           sleep(1.5)
-           puts "Name:"
-           puts "#{chosen_film.name}"
-           sleep(1.5)
-           puts "Director:"
-           puts "#{chosen_film.director}"
-           sleep(1.5)
-           puts "Description:"
-           puts "#{chosen_film.description}"
-           sleep(1.5)
-           puts "Locations:"
-           puts "#{chosen_film.locations}"
-           sleep(1.5)
-           puts "People:"
-           puts "#{chosen_film.people}"
-           sleep(1.5)
-           puts "Website:"
-           puts "#{chosen_film.url}"
-           puts " "
-           sleep(1.5)
-           puts "Make another selection or choose to exit:"
-           input = film_input_prompt
+               film_input = list_films
+               chosen_film = SGInfo.find_films(film_input)
+               sleep(1.5)
+               puts "Name:"
+               puts "#{chosen_film.name}"
+               sleep(1.5)
+               puts "Director:"
+               puts "#{chosen_film.director}"
+               sleep(1.5)
+               puts "Description:"
+               puts "#{chosen_film.description}"
+               sleep(1.5)
+               puts "Locations:"
+               puts "#{chosen_film.locations}"
+               sleep(1.5)
+               puts "People:"
+               puts "#{chosen_film.people}"
+               sleep(1.5)
+               puts "Website:"
+               puts "#{chosen_film.url}"
+               puts " "
+               sleep(1.5)
+               puts "Make another selection or choose to exit:"
+               sleep(1.5)
+               input = film_input_prompt
            when 2
-            input = film_input_prompt
             system("clear")
            goodbye
-           # sleep(2.5)
+           exit
        end
-           ending
    end
 
    def prompt
@@ -63,11 +66,13 @@ class CLI
    end
 
    def film_input_prompt
-       prompt.select("Search by Title", cycle: true ) do |menu|
-               menu.choice"List all the films", 1
-               menu.choice "Exit.", 2
+      input = prompt.select("Search by Title") do |menu|
+         menu.default 1
+               menu.choice 'List all the films', 1
+               menu.choice 'Exit.', 2
+      end
+      case_input(input)
    end
-end
 
    def list_films
       films = SGInfo.all
@@ -81,12 +86,9 @@ end
       puts "More Adventure awaits when you decide to come back!".cyan.blue.bold
    end
 
-   def not_working
-      puts "I am sorry, will you please try again.".cyan.blue.bold
-   end
-
-   def ending
+   def exit
       puts "\nHave a good day!"
    end
 end
+
 
