@@ -3,5 +3,3 @@
 require_relative '../lib/studio_ghibli'
 CLI.new.start
 
-#this is where everything will hit first then everything else will load after. The doorway, basically.
-#require keyword because it will be external

@@ -4,7 +4,6 @@ require_relative './sginfo'
 require_relative './api'
 
 class CLI
-   @@url = []
 
    def start
        puts "Hello! Welcome to Studio Ghibli, the world of magick!".cyan.red.bold
@@ -17,11 +16,11 @@ class CLI
    end
        
    def user_input(name)
-      gets.strip || gets.strip.to_i
+      gets.strip 
    end
        
-   def welcome #-> instance variable. class Variable 
-      name = gets.strip || gets.strip.to_i
+   def welcome 
+      name = gets.strip 
        puts "Hi! #{name}, Let's go on an adventure, shall we?".cyan.bold.blue
        film_input_prompt
    end
