@@ -1,6 +1,4 @@
-require 'pry'
-
- class SGInfo
+  class SGInfo
 
     @@all = []
      attr_accessor :name, :director, :description, :url, :people, :locations

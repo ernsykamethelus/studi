@@ -1,7 +1,4 @@
-require 'pry'
 require 'httparty'
- require_relative './sginfo'
- require_relative './cli'
 
 class API
  def self.get_films(url)

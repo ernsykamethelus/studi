@@ -18,3 +18,25 @@ self.send(key=, value)
 #ruby lib/studio_ghibli/api.rb
 
 # @@url = []
+
+# module StudioGhibli
+#   class Error < StandardError; end
+#   # Your code goes here...
+# end
+#where all the files are loaded and gems without requiring it across the application
+
+#  require_relative './sginfo' from here and down, from api file
+#  require_relative './cli'
+# require 'pry'
+#begin building your welcome method and the first method thats going to display content from cli file
+
+# require 'pry'
+
+# You can add fixtures and/or initialization code here to make experimenting, from here and down, it is from console file
+# with your gem easier. You can also use a different console, if you like.
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+# frozen_string_literal: true
+#!/usr/bin/env ruby

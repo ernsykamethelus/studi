@@ -1,5 +1,3 @@
-#begin building your welcome method and the first method thats going to display content
-require 'pry'
 require_relative './sginfo'
 require_relative './api'
 
@@ -19,7 +17,7 @@ class CLI
       gets.strip 
    end
        
-   def welcome 
+   def welcome
       name = gets.strip 
        puts "Hi! #{name}, Let's go on an adventure, shall we?".cyan.bold.blue
        film_input_prompt
